@@ -16,5 +16,9 @@ use Illuminate\Http\Request;
 Route::post('/cadastro','UserController@registrar');
 
 Route::group(['middleware'=>['auth:api']], function(){
-	Route::resource('veiculos', 'VeiculoController');
+	Route::get('/veiculos', 'VeiculoController@index')->middleware('scope:administrador,usuario');
+	Route::get('/veiculos/{id}', 'VeiculoController@show')->middleware('scope:administrador,usuario');
+	Route::post('/veiculos', 'VeiculoController@store')->middleware('scope:administrador');
+	Route::put('/veiculos/{id}', 'VeiculoController@update')->middleware('scope:administrador');
+	Route::delete('/veiculos/{id}', 'VeiculoController@destroy')->middleware('scope:administrador');
 });

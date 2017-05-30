@@ -12,9 +12,9 @@ class UserController extends Controller
     	if(!User::where('email', $dados['email'])->count()){
     		$dados['password'] = bcrypt($dados['password']);
     		$user = User::create($dados);
-    		return response()->json(['data'=>$user, 'status'=>true]);
+    		return response()->json(['data'=>$user], 201);
     	}else{
-    		return response()->json(['data'=>'Usuário cadastrado!', 'status'=>false]);
+    		return response()->json(['message'=>'Erro ao criar o usuário'], 400);
     	}
 
     }

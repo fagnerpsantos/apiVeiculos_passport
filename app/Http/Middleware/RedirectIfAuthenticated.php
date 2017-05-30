@@ -19,8 +19,6 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             return redirect('/home');
-        }else{
-            return response()->json(['message'=>'Usuário não autorizado'], 401);
         }
 
         return $next($request);
